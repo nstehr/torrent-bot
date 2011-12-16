@@ -1,0 +1,25 @@
+To run the torrent bot, first, make sure java is installed on your system, second, set the approriate variables in bot_config.py.  
+Then, execute the run.sh shell script.
+
+Currently, torrent bot needs to be run on the same machine as transmission daemon.
+
+To find out the supported commands send the bot a "help" message.  
+
+To download a torrent via torrent bot, use the download torrent command and pass it the url to the .torrent file on the tracker site.
+
+Currently tested against transmission 1.51, built from source.
+
+NOTE:
+
+Before you can use Torrent Bot, you must create or already have an MSN account to be used with the script. 
+
+If you add your bots email account to your buddy list, Torrent Bot should automatically add you in return.  If 
+you run into problems and this doesn't seem to work, try manually logging in 
+as the bot account and accept yourself as a friend. 
+This may be confusing so below is some steps to try to help clarify:
+
+Create an msn account for the bot. i.e my_bot@hotmail.com
+login to your main account and add the bot account (i.e my_bot@hotmail.com) as a buddy
+logout of your main account and login as the bot account
+Add your main account as a buddy
+login as your main account

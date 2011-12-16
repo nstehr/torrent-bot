@@ -1,0 +1,47 @@
+Only a stupid python wrapper to manage the beautiful Transmission
+BitTorernt Client through its new JSONRPC interface.
+You can found an old wrapper here (http://code.google.com/p/py-transmission/wiki/ReadMe)
+but 'cause from Transmission 1.33 the way you can manage it, it's jsonrpc
+and not unix-socket anymore, a project of mine need this new wrapper.
+enjoy
+
+
+#!/usr/bin/env python
+# please run transmission-daemon before this!
+
+from transmissionClient import TransmissionClient
+
+# by default, managed transmission is in local machine
+# but you can specify another url using:
+# client = TransmissionClient( 'http://anotherMachineIp:9091/transmission/rpc' )
+client = TransmissionClient()
+
+>>> client.sessionGet()
+{u'arguments': {u'pex-allowed': 1, u'port-forwarding-enabled': 0, u'encryption': u'preferred', u'speed-limit-up': 102400, u'download-dir': u'/home/lesion/Transmission/libtransmission', u'speed-limit-down': 51200, u'speed-limit-up-enabled': 0, u'peer-limit': 200, u'speed-limit-down-enabled': 1, u'port': 51413}, u'result': u'success'}
+
+
+>>> client.sessionSet( 'download-dir', '/home/lesion/download' )
+{u'arguments': {}, u'result': u'success'}
+
+
+>>> client.torrentAdd( '/home/lesion/Waking.Life.LiMITED.DVDivX-QiX.avi [mininova].torrent' )
+{u'arguments': {u'torrent-added': {u'hashString': u'c4271ed4ac8ad3813d0ece733207ca8c38c41b41', u'id': 3, u'name': u'Waking.Life.LiMITED.DVDivX-QiX.avi'}}, u'result': u'success'}
+
+
+>>> client.sessionStats()
+{u'arguments': {u'session-stats': {u'torrentCount': 1, u'activeTorrentCount': 1, u'downloadSpeed': 0, u'pausedTorrentCount': 0, u'uploadSpeed': 0}}, u'result': u'success'}
+
+>>> client.torrentGet()
+{u'arguments': {u'torrents': [{u'id': 3, u'name': u'Waking.Life.LiMITED.DVDivX-QiX.avi'}]}, u'result': u'success'}
+
+>>> client.torrentGet(  fields=['seeders', 'name', 'id', 'peersConnected', 'comment', 'leechers', 'totalSize' ]  )
+{u'arguments': {u'torrents': [{u'comment': u'Waking Life (2001), Directed by Richard Linklater, imdb.com/title/tt0243017/ (synch ok)', u'seeders': 23, u'name': u'Waking.Life.LiMITED.DVDivX-QiX.avi', u'totalSize': 730845184, u'leechers': 11, u'id': 3, u'peersConnected': 25}]}, u'result': u'success'}
+
+
+>>> client.torrentGet(  3 )
+{u'arguments': {u'torrents': []}, u'result': u'success'}
+
+
+
+
+
